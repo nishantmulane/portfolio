@@ -17,7 +17,7 @@ const Header = () => {
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
         {/* Logo */}
-        <h1 className="font-semibold tracking-tight text-lg">
+        <h1 className="font-semibold tracking-tight text-xl">
           Nishant Mulane
         </h1>
 
@@ -37,7 +37,7 @@ const Header = () => {
           <button
             onClick={toggleTheme}
             className="
-              ml-4 px-4 py-1.5 rounded-full text-xs
+              ml-8 p-4 py-1.5 rounded-full text-xs
               border border-black/20 dark:border-white/20
               transition-all duration-300
               hover:border-emerald-500

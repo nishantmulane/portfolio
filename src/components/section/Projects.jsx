@@ -20,7 +20,7 @@ const Projects = () => {
 
       <div className="mt-16 text-center">
         <a
-          href="https://github.com/your-username"
+          href="https://github.com/nishantmulane"
           target="_blank"
           rel="noopener noreferrer"
           className="gradient-underline text-sm font-medium"
