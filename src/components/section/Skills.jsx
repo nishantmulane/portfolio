@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import useAppContext from "../../context/useAppContext";
 
 const CATEGORY_LABELS = {
@@ -12,37 +13,149 @@ const Skills = () => {
   const { skills } = useAppContext();
 
   return (
-    <section id="skills" className="max-w-6xl mx-auto px-6 py-32">
-      <h2 className="text-4xl font-semibold tracking-tight text-center mb-4">
-        Skills
-      </h2>
+    <section
+      id="skills"
+      className="scroll-mt-24 py-20 md:py-28"
+    >
+      <div className="mx-auto w-full max-w-layout px-6">
+        {/* Section Label */}
 
-      <div className="mx-auto mb-14 h-1 w-16 rounded-full bg-gradient-to-r from-emerald-500 to-sky-500" />
+        <span
+          className="
+            text-xs
+            uppercase
+            tracking-[0.22em]
+            text-secondary
+          "
+        >
+          Skills
+        </span>
 
-      <div className="grid md:grid-cols-2 gap-12">
-        {Object.entries(skills).map(([category, items]) => (
-          <div key={category}>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-neutral-500 mb-4">
-              {CATEGORY_LABELS[category]}
-            </h3>
+        {/* Heading */}
 
-            <div className="flex flex-wrap gap-3">
-              {items.map(skill => (
-                <span
-                  key={skill}
+        <h2
+          className="
+            mt-4
+            max-w-4xl
+            font-display
+            text-4xl
+            leading-tight
+            tracking-tight
+            text-primary
+            sm:text-5xl
+            lg:text-6xl
+          "
+        >
+          Technologies and tools I use to build
+          modern, scalable, and reliable software.
+        </h2>
+
+        {/* Description */}
+
+        <p
+          className="
+            mt-8
+            max-w-3xl
+            text-base
+            leading-8
+            text-secondary
+          "
+        >
+          My focus is on writing maintainable code,
+          learning strong engineering fundamentals,
+          and continuously improving my development
+          workflow.
+        </p>
+
+        {/* Skills */}
+
+        <div className="mt-20 border-t border-border">
+          {Object.entries(skills).map(([category, items]) => (
+            <div
+              key={category}
+              className="
+                group
+                grid
+                gap-8
+                border-b
+                border-border
+                py-10
+                transition-all
+                duration-300
+                hover:bg-primary/5
+                lg:grid-cols-[240px_1fr]
+              "
+            >
+              {/* Category */}
+
+              <div>
+                <h3
                   className="
-                    px-4 py-1.5 rounded-full text-sm
-                    border border-neutral-300 dark:border-neutral-700
-                    transition-colors duration-300
-                    hover:border-emerald-500
+                    text-sm
+                    uppercase
+                    tracking-[0.18em]
+                    text-secondary
                   "
                 >
-                  {skill}
-                </span>
-              ))}
+                  {CATEGORY_LABELS[category]}
+                </h3>
+              </div>
+
+              {/* Skills */}
+
+              <div
+                className="
+                  flex
+                  flex-wrap
+                  gap-3
+                "
+              >
+                {items.map((skill) => (
+                  <div
+                    key={skill}
+                    className="
+                      group/item
+                    "
+                  >
+                    <span
+                      className="
+                        inline-flex
+                        items-center
+                        gap-2
+                        rounded-full
+                        border
+                        border-border
+                        px-4
+                        py-2
+                        text-sm
+                        text-primary
+                        transition-all
+                        duration-300
+                        hover:-translate-y-1
+                        hover:border-primary
+                        hover:shadow-sm
+                      "
+                    >
+                      {skill}
+
+                      <ArrowUpRight
+                        size={14}
+                        className="
+                          opacity-0
+                          -translate-x-1
+                          transition-all
+                          duration-300
+                          group-hover/item:translate-x-0
+                          group-hover/item:opacity-100
+                        "
+                      />
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

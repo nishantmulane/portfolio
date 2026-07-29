@@ -1,4 +1,4 @@
-export const experience = [
+const experienceInfo = [
   {
     id: 1,
     company: "Bosch Limited, Pune",
@@ -9,5 +9,17 @@ export const experience = [
       "Contributed to an EMI Uptime Tracker by processing log files and generating shift-wise summaries with visual indicators for uptime and downtime.",
       "Designed and developed responsive web pages for a Digital Document System, helping replace paper-based workflows using Django and frontend technologies.",
     ],
+    tech: [
+    "React",
+    "JavaScript",
+    "Tailwind CSS",
+    "Python",
+    "Git",
+    "REST API"
+  ]
+
   },
 ];
+
+export default experienceInfo;
+

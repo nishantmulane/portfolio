@@ -1,4 +1,4 @@
-export const projects = [
+const projectInfo = [
   {
     id: 1,
     title: "Shopeo — E-commerce Web App",
@@ -18,3 +18,4 @@ export const projects = [
     demo: "",
   },
 ];
+export default projectInfo;

@@ -1,101 +1,168 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Menu, Moon, Sun, X, Download } from "lucide-react";
 import useAppContext from "../../context/useAppContext";
 
+const navItems = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
+  { label: "Experience", href: "#experience" },
+  { label: "Contact", href: "#contact" },
+];
+
 const Header = () => {
-  const { theme, setTheme } = useAppContext();
-  const isDark = theme === "dark";
+  const { colorMode, setColorMode } = useAppContext();
+
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  const isDark = colorMode === "dark";
 
   const toggleTheme = () => {
-    setTheme(isDark ? "light" : "dark");
+    setColorMode(isDark ? "light" : "dark");
   };
 
-  const navItems = ["Home", "Projects", "Skills", "Experience", "Contact"];
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
 
-  return (
-    <header className="sticky top-0 z-50 bg-white/80 dark:bg-neutral-950/80 backdrop-blur border-b border-black/10 dark:border-white/10">
-      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "-35% 0px -45% 0px",
+      }
+    );
 
-        {/* Logo */}
-        <h1 className="font-semibold tracking-tight text-xl">
-          Nishant Mulane
-        </h1>
+    sections.forEach((section) => observer.observe(section));
 
-        {/* Desktop Nav */}
-        <ul className="hidden md:flex items-center gap-8 text-sm font-medium">
-          {navItems.map(item => (
-            <li key={item}>
-              <a
-                href={`#${item.toLowerCase()}`}
-                className="gradient-underline focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
-              >
-                {item}
-              </a>
-            </li>
-          ))}
+    return () => observer.disconnect();
+  }, []);
 
-          <button
-            onClick={toggleTheme}
-            className="
-              ml-8 p-4 py-1.5 rounded-full text-xs
-              border border-black/20 dark:border-white/20
-              transition-all duration-300
-              hover:border-emerald-500
-              focus:outline-none
-              focus:ring-2 focus:ring-emerald-500/40
-            "
+  const resumeLink = "/Nishant_Rahul_Mulane.pdf";
+
+  return (<header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
+  <nav className="mx-auto flex h-20 max-w-layout items-center justify-between px-6">
+    {/* Logo */}
+    <a
+      href="#home"
+      className="text-2xl font-display tracking-tight text-primary transition-opacity duration-300 hover:opacity-80"
+    >
+      Nishant Mulane
+    </a>
+
+    {/* Desktop Navigation */}
+    <div className="hidden items-center gap-8 lg:flex">
+      {navItems.map((item) => {
+        const isActive = activeSection === item.href.slice(1);
+
+        return (
+          <a
+            key={item.label}
+            href={item.href}
+            className={`group relative py-1 text-sm transition-all duration-300 ${
+              isActive
+                ? "text-primary"
+                : "text-secondary hover:text-primary"
+            }`}
           >
-            {isDark ? "Light" : "Dark"}
-          </button>
-        </ul>
+            {item.label}
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <div className="space-y-1.5">
-            <span className="block w-6 h-0.5 bg-neutral-900 dark:bg-neutral-100"></span>
-            <span className="block w-6 h-0.5 bg-neutral-900 dark:bg-neutral-100"></span>
-            <span className="block w-6 h-0.5 bg-neutral-900 dark:bg-neutral-100"></span>
-          </div>
-        </button>
-      </nav>
+            <span
+              className={`absolute -bottom-1 left-0 h-px bg-primary transition-all duration-300 ${
+                isActive ? "w-full" : "w-0 group-hover:w-full"
+              }`}
+            />
+          </a>
+        );
+      })}
 
-      {/* Mobile Dropdown */}
-      {menuOpen && (
-        <div className="md:hidden border-t border-black/10 dark:border-white/10 bg-white dark:bg-neutral-950">
-          <ul className="flex flex-col px-6 py-6 gap-4 text-sm font-medium">
-            {navItems.map(item => (
-              <li key={item}>
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  onClick={() => setMenuOpen(false)}
-                  className="gradient-underline block w-fit"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
+      {/* Resume */}
+      <a
+        href={resumeLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-secondary transition-all duration-300 hover:border-primary hover:text-primary hover:-translate-y-0.5"
+      >
+        Resume
+        <Download size={16} />
+      </a>
 
-            <button
-              onClick={() => {
-                toggleTheme();
-                setMenuOpen(false);
-              }}
-              className="
-                mt-2 w-fit px-4 py-1.5 rounded-full text-xs
-                border border-black/20 dark:border-white/20
-                hover:border-emerald-500
-              "
+      {/* Theme Toggle */}
+      <button
+        onClick={toggleTheme}
+        className="rounded-full border border-border p-2 transition-all duration-300 hover:border-primary hover:rotate-180"
+        aria-label="Toggle theme"
+      >
+        {isDark ? <Sun size={18} /> : <Moon size={18} />}
+      </button>
+    </div>
+
+    {/* Mobile Buttons */}
+    <div className="flex items-center gap-2 lg:hidden">
+      <button
+        onClick={toggleTheme}
+        className="rounded-full border border-border p-2 transition-colors duration-300 hover:border-primary"
+        aria-label="Toggle theme"
+      >
+        {isDark ? <Sun size={18} /> : <Moon size={18} />}
+      </button>
+
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="rounded-full border border-border p-2 transition-colors duration-300 hover:border-primary"
+        aria-label="Toggle menu"
+      >
+        {menuOpen ? <X size={20} /> : <Menu size={20} />}
+      </button>
+    </div>
+  </nav>
+
+  {/* Mobile Menu */}
+  <div
+    className={`overflow-hidden transition-all duration-300 ease-in-out lg:hidden ${
+      menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+    }`}
+  >
+    <div className="border-t border-border bg-background px-6 py-6">
+      <div className="flex flex-col gap-6">
+        {navItems.map((item) => {
+          const isActive = activeSection === item.href.slice(1);
+
+          return (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={() => setMenuOpen(false)}
+              className={`transition-colors duration-300 ${
+                isActive
+                  ? "text-primary"
+                  : "text-secondary hover:text-primary"
+              }`}
             >
-              {isDark ? "Light" : "Dark"}
-            </button>
-          </ul>
-        </div>
-      )}
-    </header>
+              {item.label}
+            </a>
+          );
+        })}
+
+        <a
+          href={resumeLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 flex w-fit items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-secondary transition-all duration-300 hover:border-primary hover:text-primary"
+        >
+          Resume
+          <Download size={16} />
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
   );
 };
 
