@@ -1,6 +1,6 @@
 export const typography = {
   display: "Instrument Serif",
-  body: "Inter",
+  bodyFont: "Inter",
 
   hero: "5rem",
   heading: "3rem",
