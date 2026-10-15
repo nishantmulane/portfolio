@@ -1,0 +1,16 @@
+{
+  "name": "Nishant Mulane — Portfolio",
+  "short_name": "Nishant Mulane",
+  "description": "Portfolio of Nishant Mulane, Computer Engineering graduate and frontend developer.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "icons": [
+    {
+      "src": "/favicon_icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

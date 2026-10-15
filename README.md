@@ -1,16 +1,39 @@
-# React + Vite
+# Nishant Mulane — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal portfolio for Nishant Mulane, a Computer Engineering graduate and frontend developer. The site presents a concise introduction, skills, project work, professional experience, and contact links.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19 and Vite 7
+- React Router
+- Custom CSS with a lightweight theme and UI state provider
+- Latin Inter Variable and lucide-react
 
-## React Compiler
+## Run locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+## Verify a production build
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run lint
+npm run build
+```
+
+## Content modules
+
+- `src/data/personal.js` — introduction and résumé link
+- `src/data/about.js` — biography and facts
+- `src/data/skills.js` — skills
+- `src/data/projects.js` — project summaries and GitHub/live links
+- `src/data/experience.js` — work experience
+- `src/data/contact.js` — contact links
+
+## Before deployment
+
+- Copy `.env.example` to `.env.local` and set `VITE_SITE_URL` to the production origin. Vite injects the canonical URL and absolute Open Graph/Twitter image tags during the build.
+- The portfolio portrait at `/nishant_mulane.png` is used as the social preview image.
+- Confirm résumé, contact, and profile links.

@@ -1,10 +1,50 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon_icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Nishant Mulane, a Computer Engineering graduate and frontend developer building clear, usable web applications."
+    />
+    <meta name="author" content="Nishant Mulane" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="color-scheme" content="light dark" />
+    <style>
+      html, body, #root { min-height: 100%; background: #fff; }
+      html.dark, html.dark body, html.dark #root { background: #101214; }
+      html { color-scheme: light; }
+      html.dark { color-scheme: dark; }
+    </style>
+    <script>
+      try {
+        const saved = localStorage.getItem('theme-mode');
+        const dark = saved === 'dark' || (saved !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      } catch {
+        if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
+      }
+    </script>
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Nishant Mulane — Frontend Developer" />
+    <meta
+      property="og:description"
+      content="Portfolio of Nishant Mulane, a Computer Engineering graduate and frontend developer."
+    />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nishant Mulane — Frontend Developer" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Nishant Mulane, a Computer Engineering graduate and frontend developer."
+    />
+    <!--portfolio-site-meta-->
+    <title>Nishant Mulane — Frontend Developer</title>
+    <script type="application/ld+json" id="person-schema">{"@context":"https://schema.org","@type":"Person","name":"Nishant Mulane","jobTitle":"Computer Engineering graduate","sameAs":["https://github.com/nishantmulane","https://linkedin.com/in/nishantmulane"]}</script>
   </head>
   <body>
     <div id="root"></div>
