@@ -2,6 +2,7 @@ import { Suspense, useEffect } from "react";
 import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import ScrollProgress from "../ui/ScrollProgress";
 import { personal } from "../../data/personal";
 
 function setMeta(selector, attribute, value, content) {
@@ -48,6 +49,7 @@ export default function RootLayout() {
   }, [location.hash]);
 
   return <>
+    <ScrollProgress/>
     <a className="skip-link" href="#main-content">Skip to content</a>
     <Header/>
     <main id="main-content" tabIndex="-1">

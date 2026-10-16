@@ -1,6 +1,7 @@
 export const projects = [
   {
     id: "swaraj-labs",
+    visual: "network",
     title: "Swaraj Labs — Network Visualization",
     description: "An interactive network simulation routes messages from sender through two routers and a gateway, with animated packet travel, hop details, and payload inspection.",
     tech: ["React", "Vite", "Tailwind CSS", "JavaScript"],
@@ -9,6 +10,7 @@ export const projects = [
   },
   {
     id: "shopeo",
+    visual: "storefront",
     title: "Shopeo — E-commerce Web App",
     description: "A responsive storefront using live product data, with add, remove, and update cart actions plus a product-detail modal.",
     tech: ["React", "Tailwind CSS", "Context API", "DummyJSON API"],
@@ -17,6 +19,7 @@ export const projects = [
   },
   {
     id: "3d-cube",
+    visual: "cube",
     title: "3D Cube",
     description: "A compact Three.js project exploring scene setup, geometry, lighting, camera controls, and real-time browser rendering.",
     tech: ["Three.js", "JavaScript", "Vite"],

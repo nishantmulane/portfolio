@@ -1,66 +1,68 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { personal } from "../../data/personal";
 
-const portrait = "/nishant_mulane.png";
-const HERO_TIMING = Object.freeze({
-  entrance: 520,
-  character: 56,
-  namePause: 460,
-  portraitPause: 720,
-  detailsPause: 1_120,
-});
+const nameWords = personal.name.split(" ");
 
 export default function HeroSection() {
-  const nameCharacters = Array.from(personal.name);
-  const reduceMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const [typedCount, setTypedCount] = useState(() => reduceMotion ? nameCharacters.length : 0);
-  const [portraitVisible, setPortraitVisible] = useState(reduceMotion);
-  const [detailsVisible, setDetailsVisible] = useState(reduceMotion);
+  const heroRef = useRef(null);
+  const portraitRef = useRef(null);
 
   useEffect(() => {
-    if (reduceMotion) return undefined;
+    const hero = heroRef.current;
+    if (!hero) return undefined;
 
-    let index = 0;
-    let typingTimer;
-    let portraitTimer;
-    let detailsTimer;
+    const entranceFrame = requestAnimationFrame(() => hero.classList.add("is-entered"));
+    const portrait = portraitRef.current;
+    const image = portrait?.querySelector("img");
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    if (!portrait || !image || !finePointer.matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return () => cancelAnimationFrame(entranceFrame);
+    }
 
-    const typeNextCharacter = () => {
-      if (index < nameCharacters.length) {
-        index += 1;
-        setTypedCount(index);
-        typingTimer = window.setTimeout(typeNextCharacter, index === nameCharacters.length ? HERO_TIMING.namePause : HERO_TIMING.character);
-        return;
-      }
+    let frame = 0;
+    let offsetX = 0;
+    let offsetY = 0;
 
-      portraitTimer = window.setTimeout(() => {
-        setPortraitVisible(true);
-        detailsTimer = window.setTimeout(() => setDetailsVisible(true), HERO_TIMING.detailsPause);
-      }, HERO_TIMING.portraitPause);
+    const applyOffset = () => {
+      frame = 0;
+      image.style.setProperty("--portrait-x", `${offsetX}px`);
+      image.style.setProperty("--portrait-y", `${offsetY}px`);
     };
 
-    typingTimer = window.setTimeout(typeNextCharacter, HERO_TIMING.entrance);
+    const handlePointerMove = event => {
+      const bounds = portrait.getBoundingClientRect();
+      offsetX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 8;
+      offsetY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 8;
+      if (!frame) frame = requestAnimationFrame(applyOffset);
+    };
+
+    const resetOffset = () => {
+      offsetX = 0;
+      offsetY = 0;
+      if (!frame) frame = requestAnimationFrame(applyOffset);
+    };
+
+    portrait.addEventListener("pointermove", handlePointerMove, { passive: true });
+    portrait.addEventListener("pointerleave", resetOffset, { passive: true });
     return () => {
-      window.clearTimeout(typingTimer);
-      window.clearTimeout(portraitTimer);
-      window.clearTimeout(detailsTimer);
+      cancelAnimationFrame(entranceFrame);
+      if (frame) cancelAnimationFrame(frame);
+      portrait.removeEventListener("pointermove", handlePointerMove);
+      portrait.removeEventListener("pointerleave", resetOffset);
     };
-  }, [nameCharacters.length, reduceMotion]);
+  }, []);
 
-  return <section id="top" className="hero page-wrap">
-    <p className={`eyebrow hero-kicker ${detailsVisible ? "is-visible" : ""}`}>
+  return <section ref={heroRef} id="top" className="hero page-wrap">
+    <p className="eyebrow hero-kicker">
       Frontend developer <span>·</span> {personal.location}
     </p>
     <h1 className="hero-title" aria-label={personal.name}>
-      <span aria-hidden="true">
-        {nameCharacters.slice(0, typedCount).map((character, index) => <span className="hero-title-char" key={`${character}-${index}`}>
-          {character === " " ? "\u00a0" : character}
-        </span>)}
-        <span className={`hero-caret ${typedCount === nameCharacters.length ? "is-finished" : ""}`}/>
-      </span>
+      {nameWords.map((word, index) => <span className="hero-title-mask" key={word}>
+        <span className="hero-title-word" style={{ "--word-index": index }} aria-hidden="true">{word}</span>
+      </span>)}
     </h1>
-    <div className={`hero-copy ${detailsVisible ? "is-visible" : ""}`} inert={!detailsVisible}>
+    <div className="hero-copy">
       <p className="hero-position">Computer engineering graduate focused on frontend development.</p>
       <p className="hero-description">I work with React and JavaScript, with hands-on experience building internal reporting and document workflows.</p>
       <div className="hero-links">
@@ -68,8 +70,11 @@ export default function HeroSection() {
         <a className="button button-quiet" href={personal.resume} download>Résumé <ArrowUpRight size={15}/></a>
       </div>
     </div>
-    <figure className={`hero-portrait ${portraitVisible ? "is-visible" : ""}`}>
-      <img src={portrait} alt="Nishant Mulane" width="740" height="900" fetchPriority="high"/>
+    <figure ref={portraitRef} className="hero-portrait">
+      {/* TODO(owner): supply a sharper portrait at 1000×1250 or larger; don't upscale this source. */}
+      <picture>
+        <img src="/nishant_mulane.png" alt="Nishant Mulane" width="500" height="500" fetchPriority="high" decoding="async"/>
+      </picture>
       <figcaption>
         <span>{personal.name}</span>
         <span>Computer Engineer · {personal.location.split(",")[0]}</span>

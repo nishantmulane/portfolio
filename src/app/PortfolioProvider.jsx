@@ -30,7 +30,7 @@ export function PortfolioProvider({ children }) {
       const dark = themeMode === "dark" || (themeMode === "system" && media.matches);
       document.documentElement.classList.toggle("dark", dark);
       const themeColor = document.querySelector('meta[name="theme-color"]');
-      if (themeColor) themeColor.content = dark ? "#101214" : "#FFFFFF";
+      if (themeColor) themeColor.content = dark ? "#0A0C0F" : "#FBFCFD";
     };
     applyTheme();
 

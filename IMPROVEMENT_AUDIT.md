@@ -12,6 +12,7 @@
 - **Project descriptions:** Updated the network simulator and shop descriptions using details from their local project readmes.
 - **Project link checks:** Confirmed the Swaraj Labs and Shopeo live sites load, and matched their GitHub URLs against local repository remotes. The 3D Cube repository was not present at the expected local path, so its GitHub and live links still need an external check.
 - **Accessibility details:** Added an explicit noopener policy to project links and location state to the active navigation item. Skip navigation, visible keyboard focus, mobile-menu focus handling, and reduced-motion fallbacks are in place.
+- **Mobile navigation:** The menu is rendered outside the blurred sticky header, uses safe-area and dynamic viewport sizing, scrolls internally on short screens, and locks/restores the exact document scroll position on iOS Safari.
 
 ## Highest impact
 
