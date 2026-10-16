@@ -13,6 +13,8 @@ function ProjectLink({ href, label, project }) {
 
 export default function ProjectsSection() {
   const [activeProject, setActiveProject] = useState(projects[0]?.id);
+  const [hoveredProject, setHoveredProject] = useState(null);
+  const displayedProject = hoveredProject ?? activeProject;
   const rowsRef = useRef(new Map());
 
   useEffect(() => {
@@ -44,6 +46,14 @@ export default function ProjectsSection() {
             ref={node => setRowRef(project.id, node)}
             className="project-row"
             data-project-id={project.id}
+            onPointerEnter={() => {
+              if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) setHoveredProject(project.id);
+            }}
+            onPointerLeave={() => setHoveredProject(null)}
+            onFocusCapture={() => setHoveredProject(project.id)}
+            onBlurCapture={event => {
+              if (!event.currentTarget.contains(event.relatedTarget)) setHoveredProject(null);
+            }}
             onPointerMove={event => {
               if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
               const bounds = event.currentTarget.getBoundingClientRect();
@@ -60,14 +70,14 @@ export default function ProjectsSection() {
                 <ProjectLink href={project.github} label="GitHub" project={project.title}/>
                 <ProjectLink href={project.live} label="Live" project={project.title}/>
               </div>
-              <div className="project-mobile-preview"><ProjectVisual project={project} mobile/></div>
+              <div className="project-mobile-preview"><ProjectVisual project={project} mobile active={project.id === displayedProject}/></div>
             </div>
           </article>
         </Reveal>)}
       </div>
       <aside className="project-preview-sticky" aria-label="Project concept visuals">
         <div className="project-preview-stage">
-          {projects.map(project => <ProjectVisual key={project.id} project={project} active={project.id === activeProject}/>) }
+          {projects.map(project => <ProjectVisual key={project.id} project={project} active={project.id === displayedProject}/>) }
         </div>
         <p className="preview-note">Concept visuals shown until app captures are supplied.</p>
       </aside>

@@ -27,3 +27,7 @@
 
 - **Set the production origin:** `VITE_SITE_URL` is configurable in `.env.example`, but the actual public domain is not available in this workspace and must be supplied before deployment metadata can be finalized.
 - No Browserslist warning appeared in the current production build after removing the unused CSS toolchain.
+
+- **Safari and browser preview icons:** Added 180px Apple touch icon, 192px and 512px manifest icons, a multi-size favicon, and the corrected favicon MIME declaration. Added theme-aware browser chrome colors.
+- **Social preview image:** Added a 1200×630 Open Graph image and build-time Open Graph/Twitter metadata when VITE_SITE_URL is configured.
+- **Project hover response:** Hovering or keyboard-focusing a project selects its matching preview; the network, storefront, and cube visuals each use restrained, project-specific motion.

@@ -189,7 +189,8 @@ button { color:inherit; font:inherit; }
 .project-mobile-preview { display:none; }
 .network-visual { position:relative; display:grid; width:100%; grid-template-columns:repeat(5,minmax(0,1fr)); align-items:center; padding:1.8rem 1rem 1.2rem; }
 .network-route { position:absolute; top:calc(50% - .5rem); right:12%; left:12%; height:1px; background:var(--line-strong); }
-.network-route span { position:absolute; top:-2px; left:0; width:5px; height:5px; border-radius:50%; background:var(--accent); animation:packet-travel var(--t-packet) var(--ease-inout) infinite; }
+.network-route span { position:absolute; top:-2px; left:0; width:5px; height:5px; border-radius:50%; background:var(--accent); }
+.project-preview-panel.is-active .network-route span { animation:packet-travel var(--t-packet) var(--ease-inout) infinite; }
 .network-node { z-index:1; display:flex; min-width:0; flex-direction:column; align-items:center; gap:.5rem; color:var(--muted); font-size:var(--fs-label); text-align:center; }
 .network-node-mark { width:1.15rem; height:1.15rem; border:1px solid var(--accent); border-radius:.3rem; background:var(--surface); box-shadow:0 0 0 .3rem var(--hero-bg); }
 .network-node-mark.is-endpoint { border-radius:50%; background:var(--accent-soft); }
@@ -202,7 +203,12 @@ button { color:inherit; font:inherit; }
 .store-copy > span:first-child,.store-copy > span:last-child { color:var(--muted); font-size:var(--fs-label); letter-spacing:.08em; }
 .store-copy strong { color:var(--ink-2); font-size:clamp(1rem,1.5vw,1.35rem); font-weight:450; letter-spacing:-.035em; line-height:1.2; }
 .store-products { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.45rem; }
-.store-products span { aspect-ratio:1.15; border:1px solid var(--line); border-radius:.2rem; background:var(--hero-bg); }
+.store-products span { aspect-ratio:1.15; transform:translateY(4px); border:1px solid var(--line); border-radius:.2rem; background:var(--hero-bg); opacity:.72; transition:opacity var(--t-state) var(--ease-ui),transform var(--t-state) var(--ease-out); }
+.project-preview-panel.is-active .store-products span { transform:translateY(0); opacity:1; transition-delay:calc(var(--tile-index,0) * var(--t-stagger)); }
+.store-products span:nth-child(1) { --tile-index:0; }
+.store-products span:nth-child(2) { --tile-index:1; }
+.store-products span:nth-child(3) { --tile-index:2; }
+.store-products span:nth-child(4) { --tile-index:3; }
 .store-products span:nth-child(2),.store-products span:nth-child(3) { background:var(--surface); }
 .cube-visual { display:grid; width:100%; height:100%; grid-template-rows:1fr auto; padding:1rem 1.2rem .7rem; }
 .cube-scene { display:grid; place-items:center; perspective:800px; }

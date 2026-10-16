@@ -16,9 +16,11 @@ export default defineConfig(({ mode }) => {
           const tags = siteUrl ? `
     <link rel="canonical" href="${siteUrl}/" />
     <meta property="og:url" content="${siteUrl}/" />
-    <meta property="og:image" content="${siteUrl}/nishant_mulane.png" />
+    <meta property="og:image" content="${siteUrl}/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Nishant Mulane, frontend developer" />
-    <meta name="twitter:image" content="${siteUrl}/nishant_mulane.png" />
+    <meta name="twitter:image" content="${siteUrl}/og-image.png" />
     <meta name="twitter:image:alt" content="Nishant Mulane, frontend developer" />` : "";
           return html.replace("<!--portfolio-site-meta-->", tags);
         },

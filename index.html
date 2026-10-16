@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon_icon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -10,7 +12,9 @@
     />
     <meta name="author" content="Nishant Mulane" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="theme-color" content="#FBFCFD" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0A0C0F" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-title" content="Nishant Mulane" />
     <meta name="color-scheme" content="light dark" />
     <style>
       html, body, #root { min-height: 100%; background: #fbfcfd; }
@@ -19,6 +23,7 @@
       html.dark { color-scheme: dark; }
     </style>
     <script>
+      document.documentElement.classList.add('js');
       try {
         const saved = localStorage.getItem('theme-mode');
         const dark = saved === 'dark' || (saved !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
