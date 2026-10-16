@@ -25,5 +25,6 @@ export default function ThemeToggle() {
     transition.finished.then(clearOrigin, clearOrigin);
   };
 
-  return <button className="icon-button" type="button" aria-label={`Switch to ${next} theme`} title={`Theme: ${mode}`} onClick={changeTheme}>{mode === "dark" ? <Sun size={17}/> : mode === "light" ? <Moon size={17}/> : <Monitor size={17}/>}</button>;
+  const tooltip = "Theme: " + mode + " · switch to " + next;
+  return <button className="icon-button theme-toggle" type="button" aria-label={"Theme is " + mode + ". Switch to " + next + " theme."} title={tooltip} data-tooltip={tooltip} onClick={changeTheme}>{mode === "dark" ? <Sun size={17}/> : mode === "light" ? <Moon size={17}/> : <Monitor size={17}/>}</button>;
 }

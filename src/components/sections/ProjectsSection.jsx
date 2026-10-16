@@ -75,11 +75,10 @@ export default function ProjectsSection() {
           </article>
         </Reveal>)}
       </div>
-      <aside className="project-preview-sticky" aria-label="Project concept visuals">
+      <aside className="project-preview-sticky" aria-label="Illustrative project previews, not application screenshots">
         <div className="project-preview-stage">
           {projects.map(project => <ProjectVisual key={project.id} project={project} active={project.id === displayedProject}/>) }
         </div>
-        <p className="preview-note">Concept visuals shown until app captures are supplied.</p>
       </aside>
     </div>
   </Section>;

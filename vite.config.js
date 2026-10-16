@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 export default defineConfig(({ mode }) => {
   const projectRoot = fileURLToPath(new URL(".", import.meta.url));
   const { VITE_SITE_URL = "" } = loadEnv(mode, projectRoot, "VITE_");
-  const siteUrl = VITE_SITE_URL.trim().replace(/\/+$/, "");
+  const siteUrl = (VITE_SITE_URL || "https://nishantmulane.com").trim().replace(/\/+$/, "");
 
   return {
     plugins: [
@@ -23,6 +23,10 @@ export default defineConfig(({ mode }) => {
     <meta name="twitter:image" content="${siteUrl}/og-image.png" />
     <meta name="twitter:image:alt" content="Nishant Mulane, frontend developer" />` : "";
           return html.replace("<!--portfolio-site-meta-->", tags);
+        },
+        generateBundle() {
+          const sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>' + siteUrl + '/</loc></url></urlset>';
+          this.emitFile({ type: "asset", fileName: "sitemap.xml", source: sitemap });
         },
       },
     ],

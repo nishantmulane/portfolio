@@ -52,7 +52,6 @@ export default function ProjectVisual({ project, active = false, mobile = false 
       <div className={`project-visual project-visual--${project.visual}`}>
         <Visual/>
       </div>
-      <div className="preview-caption"><span>Concept visual</span><span>App capture needed</span></div>
     </div>
   </div>;
 }

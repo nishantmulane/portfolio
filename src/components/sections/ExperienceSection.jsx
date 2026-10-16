@@ -3,7 +3,7 @@ import Reveal from "../ui/Reveal";
 import Section from "../ui/Section";
 
 export default function ExperienceSection() {
-  return <Section id="experience" label="Experience" title="Work experience">
+  return <Section id="experience" label="Experience" title="Work experience" className="experience-section">
     <div className="experience-list">{experience.map(item => <Reveal key={item.id}>
       <article className="experience-item">
         <div className="experience-meta">

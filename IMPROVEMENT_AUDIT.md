@@ -25,9 +25,14 @@
 
 ## Deployment polish
 
-- **Set the production origin:** `VITE_SITE_URL` is configurable in `.env.example`, but the actual public domain is not available in this workspace and must be supplied before deployment metadata can be finalized.
+- **Production origin:** `VITE_SITE_URL` defaults to `https://nishantmulane.com` and remains configurable for alternate production domains.
 - No Browserslist warning appeared in the current production build after removing the unused CSS toolchain.
 
 - **Safari and browser preview icons:** Added 180px Apple touch icon, 192px and 512px manifest icons, a multi-size favicon, and the corrected favicon MIME declaration. Added theme-aware browser chrome colors.
 - **Social preview image:** Added a 1200×630 Open Graph image and build-time Open Graph/Twitter metadata when VITE_SITE_URL is configured.
 - **Project hover response:** Hovering or keyboard-focusing a project selects its matching preview; the network, storefront, and cube visuals each use restrained, project-specific motion.
+
+- **Preview copy:** Removed the visible placeholder disclaimer. The drawings remain illustrative previews; real app captures are still preferable.
+- **Contact, navigation, and hero:** Fixed the single-child outer contact grid, added Skills to primary/mobile navigation, tightened hero copy spacing, enlarged the desktop portrait, and moved a smaller portrait before the mobile body copy.
+- **Theme and section rhythm:** Added a clear theme tooltip, reduced experience/contact spacing, raised the About statement's starting opacity, and aligned the standalone 404 page with both current themes.
+- **Search metadata:** The existing Person schema now includes SPPU education. A sitemap is generated during builds using the known production origin, with VITE_SITE_URL available to override it.

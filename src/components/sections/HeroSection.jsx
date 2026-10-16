@@ -62,6 +62,12 @@ export default function HeroSection() {
         <span className="hero-title-word" style={{ "--word-index": index }} aria-hidden="true">{word}</span>
       </span>)}
     </h1>
+    <figure ref={portraitRef} className="hero-portrait">
+      {/* TODO(owner): supply a sharper portrait at 1000×1250 or larger; don't upscale this source. */}
+      <picture>
+        <img src="/nishant_mulane.png" alt="Nishant Mulane" width="500" height="500" fetchPriority="high" decoding="async"/>
+      </picture>
+    </figure>
     <div className="hero-copy">
       <p className="hero-position">Computer engineering graduate focused on frontend development.</p>
       <p className="hero-description">I work with React and JavaScript, with hands-on experience building internal reporting and document workflows.</p>
@@ -70,15 +76,5 @@ export default function HeroSection() {
         <a className="button button-quiet" href={personal.resume} download>Résumé <ArrowUpRight size={15}/></a>
       </div>
     </div>
-    <figure ref={portraitRef} className="hero-portrait">
-      {/* TODO(owner): supply a sharper portrait at 1000×1250 or larger; don't upscale this source. */}
-      <picture>
-        <img src="/nishant_mulane.png" alt="Nishant Mulane" width="500" height="500" fetchPriority="high" decoding="async"/>
-      </picture>
-      <figcaption>
-        <span>{personal.name}</span>
-        <span>Computer Engineer · {personal.location.split(",")[0]}</span>
-      </figcaption>
-    </figure>
   </section>;
 }
